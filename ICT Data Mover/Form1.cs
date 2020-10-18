@@ -10,16 +10,22 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace ICT_Data_Mover
 {
     public partial class Form1 : Form
     {
-        //INICJALIZACJA ZMIENNYCH      
+        //Start-Up values    
         public string logPath = "";
         public string serverPath = "";
         private string configFile = "config.txt";
         public string errorFile = "errors.txt";
+        //UI related fields
+        private Button currentButton;
+        private Random random;
+        private int tempIndex;
+        private Form activeForm;
         //PASS/FAIL COUNTERS
         int logCounter = 0;
         int passCounter = 0;
@@ -46,6 +52,7 @@ namespace ICT_Data_Mover
             {"NOV", "11"},
             {"DEC", "12"}
         };
+
         //CONFIG FILE
         string appPath = AppDomain.CurrentDomain.BaseDirectory; //sciezka do folderu z plikiem exe
         IniFile config = new IniFile("configuration.ini");
@@ -53,12 +60,13 @@ namespace ICT_Data_Mover
         Timer timer;
         bool timerEnabled = false;
 
-        //MAIN WINDOW CALL
+        //CONSTRUCTOR
         public Form1()
         {
             InitializeComponent();
             ReadConfigurationFile();
             UpdateToolStrips(passCounter, allPassCounter, failCounter, allFailCounter);
+            random = new Random();
         }
  
         //RETURN LIST OF FILENAMES IN FOLDER, CALLED AFTER EVERY TIMER TICK
@@ -71,7 +79,7 @@ namespace ICT_Data_Mover
                 foreach (string filename in filenames)
                 {
                     ProcessLog(filename, dirOutput);
-                    if (corruptedLog)
+                    if (corruptedLog) //if file is incomplete, move to error folder and save info in report
                     {
                         if (!Directory.Exists(errorFolderCombined))
                         {
@@ -81,15 +89,15 @@ namespace ICT_Data_Mover
                     }
                 }
             }
-            else
+            else //if any of folders doesnt exist
             {
-                button1.PerformClick();
+                buttonParser.PerformClick();
                 MessageBoxButtons buttons1 = MessageBoxButtons.YesNoCancel;
                 DialogResult result1;
                 result1 = MessageBox.Show("Foldery nie istnieja. Czy chcesz je utworzyc?", "Brak folderu o podanej nazwie", buttons1);
                 if (result1 == DialogResult.Yes)
                 {
-                    try
+                    try //try to create folder
                     {
                         if (!Directory.Exists(dirInput))
                         {
@@ -127,6 +135,11 @@ namespace ICT_Data_Mover
             string boardResult = "";
             string sLogName = "";
             string newLogName = "";
+            //zamiast tego tablica ze stringami
+            //czy jest funkcja do parsowania daty/godz
+            // line.convert.todatetime()
+            //public na private
+            
             parsingOn = true;
             try
             {
@@ -258,37 +271,37 @@ namespace ICT_Data_Mover
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonParser_Click(object sender, EventArgs e)
         {
-            if (button1.Text == "ON")
+            if (buttonParser.Text == "ON")
             {
-                button1.Text = "OFF";
-                button1.BackColor = Color.Orange;
+                buttonParser.Text = "OFF";
+                buttonParser.BackColor = Color.Orange;
                 StopTimer();
             }
-            else if (button1.Text == "OFF")
+            else if (buttonParser.Text == "OFF")
             {
-                button1.Text = "ON";
-                button1.BackColor = Color.LimeGreen;
+                buttonParser.Text = "ON";
+                buttonParser.BackColor = Color.LimeGreen;
                 StartTimer();
             }
         }
 
         public void PopulateListView(string parsedLog, string errCode, string bstat = "")
         {
-            ListViewItem item1 = new ListViewItem(logCounter.ToString());
-            item1.SubItems.Add(parsedLog);
-            item1.SubItems.Add(errCode);
-            item1.SubItems.Add(DateTime.Now.ToLongTimeString());
-            listView1.Items.Insert(0, item1);
-            if (bstat == "Failed")
-            {
-                listView1.Items[0].BackColor = Color.OrangeRed;
-            }
-            else if (bstat == "Passed")
-            {
-                listView1.Items[0].BackColor = Color.Lime;
-            }
+            //ListViewItem item1 = new ListViewItem(logCounter.ToString());
+            //item1.SubItems.Add(parsedLog);
+            //item1.SubItems.Add(errCode);
+            //item1.SubItems.Add(DateTime.Now.ToLongTimeString());
+            //listView1.Items.Insert(0, item1);
+            //if (bstat == "Failed")
+            //{
+            //    listView1.Items[0].BackColor = Color.OrangeRed;
+            //}
+            //else if (bstat == "Passed")
+            //{
+            //    listView1.Items[0].BackColor = Color.Lime;
+            //}
 
         }
         public void UpdateToolStrips(int pCounter, int apCounter, int fCounter, int afCounter)
@@ -333,12 +346,12 @@ namespace ICT_Data_Mover
             }
         }
 
-        //******LOG PARSE CALLER**********
+        //******LOG PARSE TIMER**********
         void Timer_Tick(object sender, EventArgs e)
         {
             LoadLogs(textBox1.Text, textBox2.Text);
         }
-        //TIMER FUNCTIONS USED TO CALCULATE TIME BETWEEN PARSING CALLS
+        //TIMER FUNCTIONS USED TO CALCULATE TIME BETWEEN MAIN FUNCTION CALLS
         public void StartTimer()
         {
             if (!timerEnabled && !parsingOn)
@@ -360,6 +373,7 @@ namespace ICT_Data_Mover
         //FIND SEPARATOR USED IN TEXT
         public List<int> FindSep(string line, char sep)
         {
+            //Debug.Assert()
             var separator = new List<int>();
             for (int i = 0; i < line.Length; i++)
             {
@@ -375,7 +389,7 @@ namespace ICT_Data_Mover
         {
             if (!File.Exists(errorFile))
             {
-                using (StreamWriter sw = File.CreateText(errorFile)) ;
+                File.CreateText(errorFile);
             }
             using (StreamWriter sw = File.AppendText(errorFile))
             {
@@ -440,6 +454,100 @@ namespace ICT_Data_Mover
             }
             textBox1.Text = logPath;  //wpisanie sciezek do okien textbox - mozna pozniej zmienic przed wlaczeniem parsowania
             textBox2.Text = serverPath;
+        }
+
+
+        //UI FUNCTIONS
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private Color SelectThemeColor()
+        {
+            int index = random.Next(ThemeColor.ColorList.Count);
+            while(tempIndex == index)
+            {
+                index = random.Next(ThemeColor.ColorList.Count);
+            }
+            tempIndex = index;
+            string color = ThemeColor.ColorList[index];
+            return ColorTranslator.FromHtml(color);
+        }
+
+        private void ActivateButton(object btnSender)
+        {
+            if (btnSender != null)
+            {
+                if (currentButton != (Button)btnSender)
+                {
+                    DisableButton();
+                    Color color = SelectThemeColor();
+                    currentButton = (Button)btnSender;
+                    currentButton.BackColor = color;
+                    currentButton.ForeColor = Color.White;
+                    currentButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+                    panelTitleBar.BackColor = color;
+                    panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
+                }
+            }
+        }
+
+        private void DisableButton()
+        {
+            foreach (Control previousBtn in panelMenu.Controls)
+            {
+                if (previousBtn.GetType() == typeof(Button))
+                {
+                    previousBtn.BackColor = Color.FromArgb(9, 132, 227);
+                    previousBtn.ForeColor = Color.Black;
+                    previousBtn.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+                }
+            }
+        }
+
+        private void btnParser_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Parser(), sender);
+        }
+
+        private void btnStats_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OpenChildForm(Form childForm, object btnSender)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+            }
+            ActivateButton(btnSender);
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            this.panelForm.Controls.Add(childForm);
+            this.panelForm.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+            lblTitle.Text = childForm.Text;
+
         }
     }
 }
