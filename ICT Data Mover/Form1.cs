@@ -11,6 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace ICT_Data_Mover
 {
@@ -67,6 +68,7 @@ namespace ICT_Data_Mover
             ReadConfigurationFile();
             UpdateToolStrips(passCounter, allPassCounter, failCounter, allFailCounter);
             random = new Random();
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
  
         //RETURN LIST OF FILENAMES IN FOLDER, CALLED AFTER EVERY TIMER TICK
@@ -160,7 +162,7 @@ namespace ICT_Data_Mover
             boardResult = lastLine.Substring(0, 1);                         //PASS / FAIL
             //Husqv_BLDC_G2_SHO285257.LOG_b2
             //"04-JUN-20  19:22:33
-            sLogName = logName.Replace(textBox1.Text, "");                  //GET ONLY FILENAME FROM PATH
+            sLogName = logName.Replace(tBoxLogs.Text, "");                  //GET ONLY FILENAME FROM PATH
             cutLogName = sLogName.Substring(1, sLogName.IndexOf(".")-1);    //REMOVE EXTENSION
             //FORMATOWANIE DATY
             var dateIndex = FindSep(lastLine, '-');  
@@ -179,7 +181,7 @@ namespace ICT_Data_Mover
             try
             {
                 logCounter++;//do numerowania linii w listView
-                File.WriteAllLines(textBox2.Text + "\\" + newLogName, lines);       //WRITE FILE TO DESTINATION LOCATION
+                File.WriteAllLines(tBoxServer.Text + "\\" + newLogName, lines);       //WRITE FILE TO DESTINATION LOCATION
                 File.Delete(logName);                                               //REMOVE FILE IN SOURCE LOCATION
                 //iterowanie liczby pass i fail
                 if (boardResult == "\"")
@@ -230,8 +232,8 @@ namespace ICT_Data_Mover
                 serverPath = config.Read("Server folder", "Paths");
                 allPassCounter = int.Parse(config.Read("Passed boards", "Counters"));
                 allFailCounter = int.Parse(config.Read("Failed boards", "Counters"));
-                textBox1.Text = logPath;
-                textBox2.Text = serverPath;
+                tBoxLogs.Text = logPath;
+                tBoxServer.Text = serverPath;
             }
             catch(Exception  e)
             {
@@ -251,11 +253,11 @@ namespace ICT_Data_Mover
         {
             if (checkBox1.Checked)
             {
-                textBox1.Enabled = false;
+                tBoxLogs.Enabled = false;
             }
             else
             {
-                textBox1.Enabled = true;
+                tBoxLogs.Enabled = true;
             }
         }
 
@@ -263,11 +265,11 @@ namespace ICT_Data_Mover
         {
             if (checkBox2.Checked)
             {
-                textBox2.Enabled = false;
+                tBoxServer.Enabled = false;
             }
             else
             {
-                textBox2.Enabled = true;
+                tBoxServer.Enabled = true;
             }
         }
 
@@ -289,19 +291,19 @@ namespace ICT_Data_Mover
 
         public void PopulateListView(string parsedLog, string errCode, string bstat = "")
         {
-            //ListViewItem item1 = new ListViewItem(logCounter.ToString());
-            //item1.SubItems.Add(parsedLog);
-            //item1.SubItems.Add(errCode);
-            //item1.SubItems.Add(DateTime.Now.ToLongTimeString());
-            //listView1.Items.Insert(0, item1);
-            //if (bstat == "Failed")
-            //{
-            //    listView1.Items[0].BackColor = Color.OrangeRed;
-            //}
-            //else if (bstat == "Passed")
-            //{
-            //    listView1.Items[0].BackColor = Color.Lime;
-            //}
+            ListViewItem item1 = new ListViewItem(logCounter.ToString());
+            item1.SubItems.Add(parsedLog);
+            item1.SubItems.Add(errCode);
+            item1.SubItems.Add(DateTime.Now.ToLongTimeString());
+            lViewParser.Items.Insert(0, item1);
+            if (bstat == "Failed")
+            {
+                lViewParser.Items[0].BackColor = Color.OrangeRed;
+            }
+            else if (bstat == "Passed")
+            {
+                lViewParser.Items[0].BackColor = Color.Lime;
+            }
 
         }
         public void UpdateToolStrips(int pCounter, int apCounter, int fCounter, int afCounter)
@@ -314,7 +316,7 @@ namespace ICT_Data_Mover
         {
             string message = "";
             string caption = "";
-            if (textBox1.Text != logPath || textBox2.Text != serverPath)
+            if (tBoxLogs.Text != logPath || tBoxServer.Text != serverPath)
             {
                 message = "Plik config rozni sie od sciezek podanych w programie. Czy chcesz zapisac zmiany w pliku config?";
                 caption = "Zmieniono sciezke do logow lub serwera";
@@ -323,8 +325,8 @@ namespace ICT_Data_Mover
                 result = MessageBox.Show(message, caption, buttons);
                 if (result == DialogResult.Yes)
                 {
-                    config.Write("Local folder", textBox1.Text, "Paths");
-                    config.Write("Server folder", textBox2.Text, "Paths");
+                    config.Write("Local folder", tBoxLogs.Text, "Paths");
+                    config.Write("Server folder", tBoxServer.Text, "Paths");
                 }
                 if (result == DialogResult.Cancel)
                 {
@@ -349,7 +351,7 @@ namespace ICT_Data_Mover
         //******LOG PARSE TIMER**********
         void Timer_Tick(object sender, EventArgs e)
         {
-            LoadLogs(textBox1.Text, textBox2.Text);
+            LoadLogs(tBoxLogs.Text, tBoxServer.Text);
         }
         //TIMER FUNCTIONS USED TO CALCULATE TIME BETWEEN MAIN FUNCTION CALLS
         public void StartTimer()
@@ -452,8 +454,8 @@ namespace ICT_Data_Mover
                     }
                 }
             }
-            textBox1.Text = logPath;  //wpisanie sciezek do okien textbox - mozna pozniej zmienic przed wlaczeniem parsowania
-            textBox2.Text = serverPath;
+            tBoxLogs.Text = logPath;  //wpisanie sciezek do okien textbox - mozna pozniej zmienic przed wlaczeniem parsowania
+            tBoxServer.Text = serverPath;
         }
 
 
@@ -461,6 +463,18 @@ namespace ICT_Data_Mover
         private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void HideControls()
+        {
+            foreach (Control control in panelForm.Controls)
+            {
+                control.Visible = false;
+            }
+            //lblLogs.Visible = false;
+            //lblServer.Visible = false;
+            //tBoxLogs.Visible = false;
+            //tBoxServer.Visible = false;
         }
 
         private Color SelectThemeColor()
@@ -489,6 +503,7 @@ namespace ICT_Data_Mover
                     currentButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
                     panelTitleBar.BackColor = color;
                     panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
+                    HideControls();
                 }
             }
         }
@@ -506,9 +521,16 @@ namespace ICT_Data_Mover
             }
         }
 
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
         private void btnParser_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Parser(), sender);
+            ActivateButton(sender);
+            buttonParser.Visible = true;
+            lViewParser.Visible = true;
         }
 
         private void btnStats_Click(object sender, EventArgs e)
@@ -519,6 +541,10 @@ namespace ICT_Data_Mover
         private void btnSettings_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
+            lblLogs.Visible = true;
+            tBoxLogs.Visible = true;
+            lblServer.Visible = true;
+            tBoxServer.Visible = true;
         }
 
         private void btnAbout_Click(object sender, EventArgs e)
@@ -531,23 +557,15 @@ namespace ICT_Data_Mover
 
         }
 
-        private void OpenChildForm(Form childForm, object btnSender)
+        private void panelForm_Paint(object sender, PaintEventArgs e)
         {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-            }
-            ActivateButton(btnSender);
-            activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            this.panelForm.Controls.Add(childForm);
-            this.panelForm.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
-            lblTitle.Text = childForm.Text;
 
+        }
+
+        private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

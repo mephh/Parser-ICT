@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tBoxLogs = new System.Windows.Forms.TextBox();
+            this.lblLogs = new System.Windows.Forms.Label();
+            this.lblServer = new System.Windows.Forms.Label();
+            this.tBoxServer = new System.Windows.Forms.TextBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.buttonParser = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -44,15 +44,21 @@
             this.btnStats = new System.Windows.Forms.Button();
             this.btnParser = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panelForm = new System.Windows.Forms.Panel();
+            this.lViewParser = new System.Windows.Forms.ListView();
+            this.number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.logName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.errorStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
+            this.panelForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBox1
@@ -60,68 +66,75 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(887, 358);
+            this.checkBox1.Location = new System.Drawing.Point(481, 79);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 1;
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // textBox1
+            // tBoxLogs
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(615, 358);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(266, 20);
-            this.textBox1.TabIndex = 2;
+            this.tBoxLogs.Enabled = false;
+            this.tBoxLogs.Location = new System.Drawing.Point(209, 77);
+            this.tBoxLogs.Name = "tBoxLogs";
+            this.tBoxLogs.Size = new System.Drawing.Size(266, 20);
+            this.tBoxLogs.TabIndex = 2;
+            this.tBoxLogs.Visible = false;
             // 
-            // label1
+            // lblLogs
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(616, 339);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Sciezka do logow";
+            this.lblLogs.AutoSize = true;
+            this.lblLogs.Location = new System.Drawing.Point(206, 61);
+            this.lblLogs.Name = "lblLogs";
+            this.lblLogs.Size = new System.Drawing.Size(91, 13);
+            this.lblLogs.TabIndex = 3;
+            this.lblLogs.Text = "Sciezka do logow";
+            this.lblLogs.Visible = false;
             // 
-            // label2
+            // lblServer
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(619, 385);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Sciezka do serwera";
+            this.lblServer.AutoSize = true;
+            this.lblServer.Location = new System.Drawing.Point(206, 102);
+            this.lblServer.Name = "lblServer";
+            this.lblServer.Size = new System.Drawing.Size(100, 13);
+            this.lblServer.TabIndex = 4;
+            this.lblServer.Text = "Sciezka do serwera";
+            this.lblServer.Visible = false;
             // 
-            // textBox2
+            // tBoxServer
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(615, 402);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(266, 20);
-            this.textBox2.TabIndex = 5;
+            this.tBoxServer.Enabled = false;
+            this.tBoxServer.Location = new System.Drawing.Point(209, 118);
+            this.tBoxServer.Name = "tBoxServer";
+            this.tBoxServer.Size = new System.Drawing.Size(266, 20);
+            this.tBoxServer.TabIndex = 5;
+            this.tBoxServer.Visible = false;
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(887, 405);
+            this.checkBox2.Location = new System.Drawing.Point(481, 121);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(15, 14);
             this.checkBox2.TabIndex = 6;
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Visible = false;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // buttonParser
             // 
             this.buttonParser.BackColor = System.Drawing.Color.Orange;
-            this.buttonParser.Location = new System.Drawing.Point(935, 358);
+            this.buttonParser.Location = new System.Drawing.Point(1189, 61);
             this.buttonParser.Name = "buttonParser";
             this.buttonParser.Size = new System.Drawing.Size(213, 64);
             this.buttonParser.TabIndex = 8;
             this.buttonParser.Text = "OFF";
             this.buttonParser.UseVisualStyleBackColor = false;
+            this.buttonParser.Visible = false;
             this.buttonParser.Click += new System.EventHandler(this.buttonParser_Click);
             // 
             // statusStrip1
@@ -131,7 +144,7 @@
             this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 779);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1351, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1414, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
@@ -252,12 +265,22 @@
             this.panelLogo.Size = new System.Drawing.Size(200, 55);
             this.panelLogo.TabIndex = 0;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(49, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 27);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Parser ICT";
+            // 
             // buttonClose
             // 
             this.buttonClose.FlatAppearance.BorderSize = 0;
             this.buttonClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClose.Location = new System.Drawing.Point(956, 0);
+            this.buttonClose.Location = new System.Drawing.Point(1186, 0);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(28, 22);
             this.buttonClose.TabIndex = 12;
@@ -273,8 +296,9 @@
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(1151, 55);
+            this.panelTitleBar.Size = new System.Drawing.Size(1214, 55);
             this.panelTitleBar.TabIndex = 13;
+            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
             // lblTitle
             // 
@@ -282,50 +306,85 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Montserrat", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTitle.ForeColor = System.Drawing.Color.Snow;
-            this.lblTitle.Location = new System.Drawing.Point(539, 9);
+            this.lblTitle.Location = new System.Drawing.Point(571, 9);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(89, 30);
             this.lblTitle.TabIndex = 14;
             this.lblTitle.Text = "HOME";
             this.lblTitle.Click += new System.EventHandler(this.label3_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(49, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 27);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Parser ICT";
-            // 
             // panelForm
             // 
+            this.panelForm.Controls.Add(this.checkBox2);
+            this.panelForm.Controls.Add(this.buttonParser);
+            this.panelForm.Controls.Add(this.tBoxServer);
+            this.panelForm.Controls.Add(this.lViewParser);
+            this.panelForm.Controls.Add(this.lblServer);
+            this.panelForm.Controls.Add(this.lblLogs);
+            this.panelForm.Controls.Add(this.checkBox1);
+            this.panelForm.Controls.Add(this.tBoxLogs);
             this.panelForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelForm.Location = new System.Drawing.Point(0, 0);
             this.panelForm.Name = "panelForm";
-            this.panelForm.Size = new System.Drawing.Size(1351, 801);
+            this.panelForm.Size = new System.Drawing.Size(1414, 801);
             this.panelForm.TabIndex = 14;
+            this.panelForm.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForm_Paint);
+            // 
+            // lViewParser
+            // 
+            this.lViewParser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lViewParser.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.number,
+            this.logName,
+            this.errorStatus,
+            this.time});
+            this.lViewParser.FullRowSelect = true;
+            this.lViewParser.GridLines = true;
+            this.lViewParser.HideSelection = false;
+            this.lViewParser.Location = new System.Drawing.Point(206, 131);
+            this.lViewParser.Name = "lViewParser";
+            this.lViewParser.Size = new System.Drawing.Size(1196, 648);
+            this.lViewParser.TabIndex = 9;
+            this.lViewParser.UseCompatibleStateImageBehavior = false;
+            this.lViewParser.View = System.Windows.Forms.View.Details;
+            this.lViewParser.Visible = false;
+            // 
+            // number
+            // 
+            this.number.Text = "Nr";
+            this.number.Width = 30;
+            // 
+            // logName
+            // 
+            this.logName.Text = "Nazwa pliku";
+            this.logName.Width = 600;
+            // 
+            // errorStatus
+            // 
+            this.errorStatus.Text = "Status";
+            this.errorStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.errorStatus.Width = 440;
+            // 
+            // time
+            // 
+            this.time.Text = "Godzina";
+            this.time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.time.Width = 90;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1351, 801);
-            this.Controls.Add(this.buttonParser);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.checkBox1);
+            this.ClientSize = new System.Drawing.Size(1414, 801);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panelForm);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ICT Data Mover";
+            this.Text = "Parser ICT";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -334,6 +393,8 @@
             this.panelLogo.PerformLayout();
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
+            this.panelForm.ResumeLayout(false);
+            this.panelForm.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,10 +403,10 @@
         #endregion
 
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tBoxLogs;
+        private System.Windows.Forms.Label lblLogs;
+        private System.Windows.Forms.Label lblServer;
+        private System.Windows.Forms.TextBox tBoxServer;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button buttonParser;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -362,6 +423,11 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panelForm;
+        private System.Windows.Forms.ListView lViewParser;
+        private System.Windows.Forms.ColumnHeader number;
+        private System.Windows.Forms.ColumnHeader logName;
+        private System.Windows.Forms.ColumnHeader errorStatus;
+        private System.Windows.Forms.ColumnHeader time;
     }
 }
 
