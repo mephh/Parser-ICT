@@ -22,11 +22,6 @@ namespace ICT_Data_Mover
         public string serverPath = "";
         private string configFile = "config.txt";
         public string errorFile = "errors.txt";
-        //UI related fields
-        private Button currentButton;
-        private Random random;
-        private int tempIndex;
-        private Form activeForm;
         //PASS/FAIL COUNTERS
         int logCounter = 0;
         int passCounter = 0;
@@ -37,6 +32,7 @@ namespace ICT_Data_Mover
         public bool parsingOn = false;
         public bool corruptedLog = false;
         public string errorFolder = "errors\\";
+
         //CONVERT MONTH NUMBER TO NAME
         Dictionary<string, string> months = new Dictionary<string, string>()
         {
@@ -66,9 +62,7 @@ namespace ICT_Data_Mover
         {
             InitializeComponent();
             ReadConfigurationFile();
-            UpdateToolStrips(passCounter, allPassCounter, failCounter, allFailCounter);
-            random = new Random();
-            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            UpdateStatistics(passCounter, allPassCounter, failCounter, allFailCounter);
         }
  
         //RETURN LIST OF FILENAMES IN FOLDER, CALLED AFTER EVERY TIMER TICK
@@ -195,7 +189,7 @@ namespace ICT_Data_Mover
                     boardStatus = "Failed";
                 }
                 PopulateListView(newLogName, "  OK!", boardStatus);
-                UpdateToolStrips(passCounter, allPassCounter, failCounter, allFailCounter); //update po kazdym logu
+                UpdateStatistics(passCounter, allPassCounter, failCounter, allFailCounter); //update po kazdym logu
             }
             catch(Exception e)
             {
@@ -244,47 +238,18 @@ namespace ICT_Data_Mover
             }
         }
 
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            //NOT IMPLEMENTED
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                tBoxLogs.Enabled = false;
-            }
-            else
-            {
-                tBoxLogs.Enabled = true;
-            }
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked)
-            {
-                tBoxServer.Enabled = false;
-            }
-            else
-            {
-                tBoxServer.Enabled = true;
-            }
-        }
-
         private void buttonParser_Click(object sender, EventArgs e)
         {
             if (buttonParser.Text == "ON")
             {
                 buttonParser.Text = "OFF";
-                buttonParser.BackColor = Color.Orange;
+                buttonParser.BackColor = Color.FromArgb(192, 57, 43);
                 StopTimer();
             }
             else if (buttonParser.Text == "OFF")
             {
                 buttonParser.Text = "ON";
-                buttonParser.BackColor = Color.LimeGreen;
+                buttonParser.BackColor = Color.FromArgb(39, 174, 96);
                 StartTimer();
             }
         }
@@ -298,18 +263,20 @@ namespace ICT_Data_Mover
             lViewParser.Items.Insert(0, item1);
             if (bstat == "Failed")
             {
-                lViewParser.Items[0].BackColor = Color.OrangeRed;
+                lViewParser.Items[0].BackColor = Color.FromArgb(192, 57, 43);
             }
             else if (bstat == "Passed")
             {
-                lViewParser.Items[0].BackColor = Color.Lime;
+                lViewParser.Items[0].BackColor = Color.FromArgb(39, 174, 96);
             }
 
         }
-        public void UpdateToolStrips(int pCounter, int apCounter, int fCounter, int afCounter)
+        public void UpdateStatistics(int pCounter, int apCounter, int fCounter, int afCounter)
         {
-            toolStripStatusLabel1.Text = "Od uruchomienia: " + pCounter + " pass | " + fCounter + " fail";
-            toolStripStatusLabel2.Text = "Wszystkie: " + apCounter + " pass | " + afCounter + " fail";
+            mlblCurrent.Text = "Od uruchomienia: " + pCounter + " pass | " + fCounter + " fail";
+            mlblAll.Text = "Wszystkie: " + apCounter + " pass | " + afCounter + " fail";
+            //toolStripStatusLabel1.Text = "Od uruchomienia: " + pCounter + " pass | " + fCounter + " fail";
+            //toolStripStatusLabel2.Text = "Wszystkie: " + apCounter + " pass | " + afCounter + " fail";
         }
         //CHECKS IF CURRENT PATHS ARE DIFFERENT THAN ONES STORED IN CONFIG FILE
         private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
@@ -356,10 +323,24 @@ namespace ICT_Data_Mover
         //TIMER FUNCTIONS USED TO CALCULATE TIME BETWEEN MAIN FUNCTION CALLS
         public void StartTimer()
         {
+            int t;
+            try
+            {
+                t = Convert.ToInt32(tBoxTimer.Text);
+            }
+            catch
+            {
+                t = 0;
+            }
+            if (t < 1)
+            {
+                t = 1;
+                tBoxTimer.Text = "1";
+            }
             if (!timerEnabled && !parsingOn)
             {
                 timer = new Timer();
-                timer.Interval = 10000;
+                timer.Interval = t*1000;//10000;
                 timer.Tick += Timer_Tick;
                 timer.Start();
                 timerEnabled = true;
@@ -399,65 +380,6 @@ namespace ICT_Data_Mover
             }
         }
 
-        //******RESIDUAL CODE********************
-        //******CONFIG WCZYTYWANY PRZEZ READCONFIGURATIONFILE***********
-        private void LoadConfigFile()
-        {
-            try
-            {
-                string currentLine = "";
-                FileStream FS = new FileStream(configFile, FileMode.Open);
-                using (StreamReader SR = new StreamReader(FS))
-                {
-                    while (SR.Peek() > 0)
-                    {
-                        currentLine = SR.ReadLine();
-                        if (currentLine.StartsWith("log_path"))
-                        {
-                            logPath = currentLine.Substring(currentLine.IndexOf("=") + 2);
-                        }
-                        if (currentLine.StartsWith("server_path"))
-                        {
-                            serverPath = currentLine.Substring(currentLine.IndexOf("=") + 2);
-                        }
-                        if (currentLine.StartsWith("All Pass"))
-                        {
-                            allPassCounter = int.Parse(currentLine.Substring(currentLine.IndexOf(":") + 1));
-                        }
-                        if (currentLine.StartsWith("All Fail"))
-                        {
-                            allFailCounter = int.Parse(currentLine.Substring(currentLine.IndexOf(":") + 1));
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                string message = e.Message;
-                SaveErrorToFile(message);
-                string caption = "Blad podczas wczytywania";
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                DialogResult result;
-                result = MessageBox.Show(message, caption, buttons);
-                if (result == DialogResult.OK)
-                {
-                    try
-                    {
-                        FileStream FS = new FileStream(configFile, FileMode.Create);
-                        FS.Close();
-                    }
-                    catch (Exception ee)
-                    {
-                        message = "Brak uprawnien do utworzenia pliku config. Sprawdz czy aplikacja nie znajduje sie w folderze systemowym.   ";
-                        SaveErrorToFile(message + ee.Message);
-                        MessageBox.Show(message);
-                    }
-                }
-            }
-            tBoxLogs.Text = logPath;  //wpisanie sciezek do okien textbox - mozna pozniej zmienic przed wlaczeniem parsowania
-            tBoxServer.Text = serverPath;
-        }
-
 
         //UI FUNCTIONS
         private void buttonClose_Click(object sender, EventArgs e)
@@ -465,107 +387,22 @@ namespace ICT_Data_Mover
             Close();
         }
 
-        private void HideControls()
-        {
-            foreach (Control control in panelForm.Controls)
-            {
-                control.Visible = false;
-            }
-            //lblLogs.Visible = false;
-            //lblServer.Visible = false;
-            //tBoxLogs.Visible = false;
-            //tBoxServer.Visible = false;
-        }
-
-        private Color SelectThemeColor()
-        {
-            int index = random.Next(ThemeColor.ColorList.Count);
-            while(tempIndex == index)
-            {
-                index = random.Next(ThemeColor.ColorList.Count);
-            }
-            tempIndex = index;
-            string color = ThemeColor.ColorList[index];
-            return ColorTranslator.FromHtml(color);
-        }
-
-        private void ActivateButton(object btnSender)
-        {
-            if (btnSender != null)
-            {
-                if (currentButton != (Button)btnSender)
-                {
-                    DisableButton();
-                    Color color = SelectThemeColor();
-                    currentButton = (Button)btnSender;
-                    currentButton.BackColor = color;
-                    currentButton.ForeColor = Color.White;
-                    currentButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-                    panelTitleBar.BackColor = color;
-                    panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
-                    HideControls();
-                }
-            }
-        }
-
-        private void DisableButton()
-        {
-            foreach (Control previousBtn in panelMenu.Controls)
-            {
-                if (previousBtn.GetType() == typeof(Button))
-                {
-                    previousBtn.BackColor = Color.FromArgb(9, 132, 227);
-                    previousBtn.ForeColor = Color.Black;
-                    previousBtn.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-                }
-            }
-        }
-
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
-
-        private void btnParser_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender);
-            buttonParser.Visible = true;
-            lViewParser.Visible = true;
-        }
-
-        private void btnStats_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender);
-        }
-
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender);
-            lblLogs.Visible = true;
-            tBoxLogs.Visible = true;
-            lblServer.Visible = true;
-            tBoxServer.Visible = true;
-        }
-
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender);
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panelForm_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
     }
 }

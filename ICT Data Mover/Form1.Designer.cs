@@ -28,261 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.tBoxLogs = new System.Windows.Forms.TextBox();
-            this.lblLogs = new System.Windows.Forms.Label();
-            this.lblServer = new System.Windows.Forms.Label();
-            this.tBoxServer = new System.Windows.Forms.TextBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.buttonParser = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.btnAbout = new System.Windows.Forms.Button();
-            this.btnSettings = new System.Windows.Forms.Button();
-            this.btnStats = new System.Windows.Forms.Button();
-            this.btnParser = new System.Windows.Forms.Button();
-            this.panelLogo = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buttonClose = new System.Windows.Forms.Button();
             this.panelTitleBar = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.panelForm = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tabControl = new MetroFramework.Controls.MetroTabControl();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.panelOnOff = new System.Windows.Forms.Panel();
+            this.buttonParser = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelListview = new System.Windows.Forms.Panel();
             this.lViewParser = new System.Windows.Forms.ListView();
             this.number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.logName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.errorStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.statusStrip1.SuspendLayout();
-            this.panelMenu.SuspendLayout();
-            this.panelLogo.SuspendLayout();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.panelSettings = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblLogs = new System.Windows.Forms.Label();
+            this.tBoxLogs = new System.Windows.Forms.TextBox();
+            this.lblServer = new System.Windows.Forms.Label();
+            this.tBoxServer = new System.Windows.Forms.TextBox();
+            this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.mlblCurrent = new MetroFramework.Controls.MetroLabel();
+            this.mlblAll = new MetroFramework.Controls.MetroLabel();
+            this.lblAbout = new MetroFramework.Controls.MetroLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tBoxTimer = new System.Windows.Forms.TextBox();
             this.panelTitleBar.SuspendLayout();
-            this.panelForm.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
+            this.panelOnOff.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panelListview.SuspendLayout();
+            this.metroTabPage2.SuspendLayout();
+            this.metroTabPage3.SuspendLayout();
+            this.panelSettings.SuspendLayout();
+            this.metroTabPage4.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(481, 79);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // tBoxLogs
-            // 
-            this.tBoxLogs.Enabled = false;
-            this.tBoxLogs.Location = new System.Drawing.Point(209, 77);
-            this.tBoxLogs.Name = "tBoxLogs";
-            this.tBoxLogs.Size = new System.Drawing.Size(266, 20);
-            this.tBoxLogs.TabIndex = 2;
-            this.tBoxLogs.Visible = false;
-            // 
-            // lblLogs
-            // 
-            this.lblLogs.AutoSize = true;
-            this.lblLogs.Location = new System.Drawing.Point(206, 61);
-            this.lblLogs.Name = "lblLogs";
-            this.lblLogs.Size = new System.Drawing.Size(91, 13);
-            this.lblLogs.TabIndex = 3;
-            this.lblLogs.Text = "Sciezka do logow";
-            this.lblLogs.Visible = false;
-            // 
-            // lblServer
-            // 
-            this.lblServer.AutoSize = true;
-            this.lblServer.Location = new System.Drawing.Point(206, 102);
-            this.lblServer.Name = "lblServer";
-            this.lblServer.Size = new System.Drawing.Size(100, 13);
-            this.lblServer.TabIndex = 4;
-            this.lblServer.Text = "Sciezka do serwera";
-            this.lblServer.Visible = false;
-            // 
-            // tBoxServer
-            // 
-            this.tBoxServer.Enabled = false;
-            this.tBoxServer.Location = new System.Drawing.Point(209, 118);
-            this.tBoxServer.Name = "tBoxServer";
-            this.tBoxServer.Size = new System.Drawing.Size(266, 20);
-            this.tBoxServer.TabIndex = 5;
-            this.tBoxServer.Visible = false;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(481, 121);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(15, 14);
-            this.checkBox2.TabIndex = 6;
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.Visible = false;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // buttonParser
-            // 
-            this.buttonParser.BackColor = System.Drawing.Color.Orange;
-            this.buttonParser.Location = new System.Drawing.Point(1189, 61);
-            this.buttonParser.Name = "buttonParser";
-            this.buttonParser.Size = new System.Drawing.Size(213, 64);
-            this.buttonParser.TabIndex = 8;
-            this.buttonParser.Text = "OFF";
-            this.buttonParser.UseVisualStyleBackColor = false;
-            this.buttonParser.Visible = false;
-            this.buttonParser.Click += new System.EventHandler(this.buttonParser_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 779);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1414, 22);
-            this.statusStrip1.TabIndex = 10;
-            this.statusStrip1.Text = "statusStrip1";
-            this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panelMenu
-            // 
-            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
-            this.panelMenu.Controls.Add(this.btnAbout);
-            this.panelMenu.Controls.Add(this.btnSettings);
-            this.panelMenu.Controls.Add(this.btnStats);
-            this.panelMenu.Controls.Add(this.btnParser);
-            this.panelMenu.Controls.Add(this.panelLogo);
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(200, 779);
-            this.panelMenu.TabIndex = 11;
-            // 
-            // btnAbout
-            // 
-            this.btnAbout.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnAbout.FlatAppearance.BorderSize = 0;
-            this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbout.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnAbout.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAbout.Image = global::ICT_Data_Mover.Properties.Resources.info;
-            this.btnAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAbout.Location = new System.Drawing.Point(0, 719);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnAbout.Size = new System.Drawing.Size(200, 60);
-            this.btnAbout.TabIndex = 4;
-            this.btnAbout.Text = "   O programie";
-            this.btnAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSettings.FlatAppearance.BorderSize = 0;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSettings.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSettings.Image = global::ICT_Data_Mover.Properties.Resources.setting_lines;
-            this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSettings.Location = new System.Drawing.Point(0, 175);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnSettings.Size = new System.Drawing.Size(200, 60);
-            this.btnSettings.TabIndex = 3;
-            this.btnSettings.Text = "   Ustawienia";
-            this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
-            // 
-            // btnStats
-            // 
-            this.btnStats.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnStats.FlatAppearance.BorderSize = 0;
-            this.btnStats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStats.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnStats.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnStats.Image = global::ICT_Data_Mover.Properties.Resources.stats;
-            this.btnStats.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStats.Location = new System.Drawing.Point(0, 115);
-            this.btnStats.Name = "btnStats";
-            this.btnStats.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnStats.Size = new System.Drawing.Size(200, 60);
-            this.btnStats.TabIndex = 2;
-            this.btnStats.Text = "   Statystyki";
-            this.btnStats.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStats.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnStats.UseVisualStyleBackColor = true;
-            this.btnStats.Click += new System.EventHandler(this.btnStats_Click);
-            // 
-            // btnParser
-            // 
-            this.btnParser.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnParser.FlatAppearance.BorderSize = 0;
-            this.btnParser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnParser.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnParser.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnParser.Image = global::ICT_Data_Mover.Properties.Resources.file__2_;
-            this.btnParser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnParser.Location = new System.Drawing.Point(0, 55);
-            this.btnParser.Name = "btnParser";
-            this.btnParser.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnParser.Size = new System.Drawing.Size(200, 60);
-            this.btnParser.TabIndex = 1;
-            this.btnParser.Text = "   Parser";
-            this.btnParser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnParser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnParser.UseVisualStyleBackColor = true;
-            this.btnParser.Click += new System.EventHandler(this.btnParser_Click);
-            // 
-            // panelLogo
-            // 
-            this.panelLogo.Controls.Add(this.label3);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(200, 55);
-            this.panelLogo.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(49, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 27);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Parser ICT";
             // 
             // buttonClose
             // 
+            this.buttonClose.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonClose.FlatAppearance.BorderSize = 0;
             this.buttonClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClose.Location = new System.Drawing.Point(1186, 0);
+            this.buttonClose.Location = new System.Drawing.Point(1367, 0);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(28, 22);
+            this.buttonClose.Size = new System.Drawing.Size(47, 49);
             this.buttonClose.TabIndex = 12;
             this.buttonClose.Text = "X";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -290,45 +91,98 @@
             // 
             // panelTitleBar
             // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
-            this.panelTitleBar.Controls.Add(this.lblTitle);
+            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panelTitleBar.Controls.Add(this.label3);
             this.panelTitleBar.Controls.Add(this.buttonClose);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
+            this.panelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(1214, 55);
+            this.panelTitleBar.Size = new System.Drawing.Size(1414, 49);
             this.panelTitleBar.TabIndex = 13;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
-            // lblTitle
+            // label3
             // 
-            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Montserrat", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblTitle.ForeColor = System.Drawing.Color.Snow;
-            this.lblTitle.Location = new System.Drawing.Point(571, 9);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(89, 30);
-            this.lblTitle.TabIndex = 14;
-            this.lblTitle.Text = "HOME";
-            this.lblTitle.Click += new System.EventHandler(this.label3_Click);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(655, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 27);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Parser ICT";
             // 
-            // panelForm
+            // tabControl
             // 
-            this.panelForm.Controls.Add(this.checkBox2);
-            this.panelForm.Controls.Add(this.buttonParser);
-            this.panelForm.Controls.Add(this.tBoxServer);
-            this.panelForm.Controls.Add(this.lViewParser);
-            this.panelForm.Controls.Add(this.lblServer);
-            this.panelForm.Controls.Add(this.lblLogs);
-            this.panelForm.Controls.Add(this.checkBox1);
-            this.panelForm.Controls.Add(this.tBoxLogs);
-            this.panelForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelForm.Location = new System.Drawing.Point(0, 0);
-            this.panelForm.Name = "panelForm";
-            this.panelForm.Size = new System.Drawing.Size(1414, 801);
-            this.panelForm.TabIndex = 14;
-            this.panelForm.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForm_Paint);
+            this.tabControl.Controls.Add(this.metroTabPage1);
+            this.tabControl.Controls.Add(this.metroTabPage2);
+            this.tabControl.Controls.Add(this.metroTabPage3);
+            this.tabControl.Controls.Add(this.metroTabPage4);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.FontWeight = MetroFramework.MetroTabControlWeight.Regular;
+            this.tabControl.Location = new System.Drawing.Point(0, 49);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 2;
+            this.tabControl.Size = new System.Drawing.Size(1414, 752);
+            this.tabControl.TabIndex = 15;
+            this.tabControl.UseSelectable = true;
+            // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.BackColor = System.Drawing.SystemColors.Menu;
+            this.metroTabPage1.Controls.Add(this.panelOnOff);
+            this.metroTabPage1.Controls.Add(this.panel1);
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Margin = new System.Windows.Forms.Padding(0);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(1406, 710);
+            this.metroTabPage1.Style = MetroFramework.MetroColorStyle.Black;
+            this.metroTabPage1.TabIndex = 0;
+            this.metroTabPage1.Text = "Parser";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // panelOnOff
+            // 
+            this.panelOnOff.BackColor = System.Drawing.Color.Transparent;
+            this.panelOnOff.Controls.Add(this.buttonParser);
+            this.panelOnOff.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelOnOff.Location = new System.Drawing.Point(1233, 0);
+            this.panelOnOff.Name = "panelOnOff";
+            this.panelOnOff.Size = new System.Drawing.Size(173, 710);
+            this.panelOnOff.TabIndex = 3;
+            // 
+            // buttonParser
+            // 
+            this.buttonParser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
+            this.buttonParser.Location = new System.Drawing.Point(3, 615);
+            this.buttonParser.Name = "buttonParser";
+            this.buttonParser.Size = new System.Drawing.Size(170, 92);
+            this.buttonParser.TabIndex = 9;
+            this.buttonParser.Text = "OFF";
+            this.buttonParser.UseVisualStyleBackColor = false;
+            this.buttonParser.Click += new System.EventHandler(this.buttonParser_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panelListview);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1227, 710);
+            this.panel1.TabIndex = 2;
+            // 
+            // panelListview
+            // 
+            this.panelListview.Controls.Add(this.lViewParser);
+            this.panelListview.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelListview.Location = new System.Drawing.Point(0, 0);
+            this.panelListview.Name = "panelListview";
+            this.panelListview.Size = new System.Drawing.Size(1227, 710);
+            this.panelListview.TabIndex = 3;
             // 
             // lViewParser
             // 
@@ -338,16 +192,16 @@
             this.logName,
             this.errorStatus,
             this.time});
+            this.lViewParser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lViewParser.FullRowSelect = true;
             this.lViewParser.GridLines = true;
             this.lViewParser.HideSelection = false;
-            this.lViewParser.Location = new System.Drawing.Point(206, 131);
+            this.lViewParser.Location = new System.Drawing.Point(0, 0);
             this.lViewParser.Name = "lViewParser";
-            this.lViewParser.Size = new System.Drawing.Size(1196, 648);
-            this.lViewParser.TabIndex = 9;
+            this.lViewParser.Size = new System.Drawing.Size(1227, 710);
+            this.lViewParser.TabIndex = 12;
             this.lViewParser.UseCompatibleStateImageBehavior = false;
             this.lViewParser.View = System.Windows.Forms.View.Details;
-            this.lViewParser.Visible = false;
             // 
             // number
             // 
@@ -371,63 +225,266 @@
             this.time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.time.Width = 90;
             // 
+            // metroTabPage2
+            // 
+            this.metroTabPage2.Controls.Add(this.panel5);
+            this.metroTabPage2.HorizontalScrollbarBarColor = true;
+            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage2.Name = "metroTabPage2";
+            this.metroTabPage2.Size = new System.Drawing.Size(1406, 710);
+            this.metroTabPage2.TabIndex = 1;
+            this.metroTabPage2.Text = "Statystyki";
+            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
+            // 
+            // metroTabPage3
+            // 
+            this.metroTabPage3.Controls.Add(this.panelSettings);
+            this.metroTabPage3.HorizontalScrollbarBarColor = true;
+            this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage3.HorizontalScrollbarSize = 10;
+            this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage3.Name = "metroTabPage3";
+            this.metroTabPage3.Size = new System.Drawing.Size(1406, 710);
+            this.metroTabPage3.TabIndex = 2;
+            this.metroTabPage3.Text = "Ustawienia";
+            this.metroTabPage3.VerticalScrollbarBarColor = true;
+            this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage3.VerticalScrollbarSize = 10;
+            // 
+            // panelSettings
+            // 
+            this.panelSettings.BackColor = System.Drawing.Color.Transparent;
+            this.panelSettings.Controls.Add(this.tBoxTimer);
+            this.panelSettings.Controls.Add(this.label1);
+            this.panelSettings.Controls.Add(this.label4);
+            this.panelSettings.Controls.Add(this.lblLogs);
+            this.panelSettings.Controls.Add(this.tBoxLogs);
+            this.panelSettings.Controls.Add(this.lblServer);
+            this.panelSettings.Controls.Add(this.tBoxServer);
+            this.panelSettings.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSettings.Location = new System.Drawing.Point(0, 0);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(300, 710);
+            this.panelSettings.TabIndex = 20;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(85, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(121, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "LOGOWANIE DANYCH";
+            // 
+            // lblLogs
+            // 
+            this.lblLogs.AutoSize = true;
+            this.lblLogs.Location = new System.Drawing.Point(8, 56);
+            this.lblLogs.Name = "lblLogs";
+            this.lblLogs.Size = new System.Drawing.Size(169, 13);
+            this.lblLogs.TabIndex = 17;
+            this.lblLogs.Text = "Folder z którego pobierane są logi:";
+            // 
+            // tBoxLogs
+            // 
+            this.tBoxLogs.Location = new System.Drawing.Point(11, 72);
+            this.tBoxLogs.Name = "tBoxLogs";
+            this.tBoxLogs.Size = new System.Drawing.Size(266, 20);
+            this.tBoxLogs.TabIndex = 16;
+            this.tBoxLogs.Text = "C:\\Teradyne\\MEASDATA";
+            // 
+            // lblServer
+            // 
+            this.lblServer.AutoSize = true;
+            this.lblServer.Location = new System.Drawing.Point(8, 97);
+            this.lblServer.Name = "lblServer";
+            this.lblServer.Size = new System.Drawing.Size(244, 13);
+            this.lblServer.TabIndex = 18;
+            this.lblServer.Text = "Folder do którego zapisywane są logi na serwerze:";
+            // 
+            // tBoxServer
+            // 
+            this.tBoxServer.Location = new System.Drawing.Point(11, 113);
+            this.tBoxServer.Name = "tBoxServer";
+            this.tBoxServer.Size = new System.Drawing.Size(266, 20);
+            this.tBoxServer.TabIndex = 19;
+            this.tBoxServer.Text = "Z:\\";
+            // 
+            // metroTabPage4
+            // 
+            this.metroTabPage4.Controls.Add(this.panel4);
+            this.metroTabPage4.Controls.Add(this.panel3);
+            this.metroTabPage4.HorizontalScrollbarBarColor = true;
+            this.metroTabPage4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage4.HorizontalScrollbarSize = 10;
+            this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage4.Name = "metroTabPage4";
+            this.metroTabPage4.Size = new System.Drawing.Size(1406, 710);
+            this.metroTabPage4.TabIndex = 3;
+            this.metroTabPage4.Text = "O programie";
+            this.metroTabPage4.VerticalScrollbarBarColor = true;
+            this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage4.VerticalScrollbarSize = 10;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(1339, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(67, 710);
+            this.panel4.TabIndex = 4;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
+            this.panel3.Controls.Add(this.lblAbout);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(300, 710);
+            this.panel3.TabIndex = 3;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(216, 143);
+            this.label2.TabIndex = 0;
+            this.label2.Text = resources.GetString("label2.Text");
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.Transparent;
+            this.panel5.Controls.Add(this.mlblAll);
+            this.panel5.Controls.Add(this.mlblCurrent);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(300, 710);
+            this.panel5.TabIndex = 2;
+            // 
+            // mlblCurrent
+            // 
+            this.mlblCurrent.AutoSize = true;
+            this.mlblCurrent.Location = new System.Drawing.Point(8, 23);
+            this.mlblCurrent.Name = "mlblCurrent";
+            this.mlblCurrent.Size = new System.Drawing.Size(81, 19);
+            this.mlblCurrent.TabIndex = 0;
+            this.mlblCurrent.Text = "metroLabel1";
+            // 
+            // mlblAll
+            // 
+            this.mlblAll.AutoSize = true;
+            this.mlblAll.Location = new System.Drawing.Point(8, 57);
+            this.mlblAll.Name = "mlblAll";
+            this.mlblAll.Size = new System.Drawing.Size(81, 19);
+            this.mlblAll.TabIndex = 1;
+            this.mlblAll.Text = "metroLabel1";
+            // 
+            // lblAbout
+            // 
+            this.lblAbout.AutoSize = true;
+            this.lblAbout.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblAbout.Location = new System.Drawing.Point(0, 672);
+            this.lblAbout.Name = "lblAbout";
+            this.lblAbout.Size = new System.Drawing.Size(87, 38);
+            this.lblAbout.TabIndex = 1;
+            this.lblAbout.Text = "V1.1\r\nZmienione UI";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 169);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(196, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Co ile sekund parser ma sprawdzać logi:";
+            // 
+            // tBoxTimer
+            // 
+            this.tBoxTimer.Location = new System.Drawing.Point(210, 166);
+            this.tBoxTimer.Name = "tBoxTimer";
+            this.tBoxTimer.Size = new System.Drawing.Size(34, 20);
+            this.tBoxTimer.TabIndex = 22;
+            this.tBoxTimer.Text = "10";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1414, 801);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.panelTitleBar);
-            this.Controls.Add(this.panelMenu);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.panelForm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Parser ICT";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.panelMenu.ResumeLayout(false);
-            this.panelLogo.ResumeLayout(false);
-            this.panelLogo.PerformLayout();
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
-            this.panelForm.ResumeLayout(false);
-            this.panelForm.PerformLayout();
+            this.tabControl.ResumeLayout(false);
+            this.metroTabPage1.ResumeLayout(false);
+            this.panelOnOff.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panelListview.ResumeLayout(false);
+            this.metroTabPage2.ResumeLayout(false);
+            this.metroTabPage3.ResumeLayout(false);
+            this.panelSettings.ResumeLayout(false);
+            this.panelSettings.PerformLayout();
+            this.metroTabPage4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox tBoxLogs;
-        private System.Windows.Forms.Label lblLogs;
-        private System.Windows.Forms.Label lblServer;
-        private System.Windows.Forms.TextBox tBoxServer;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Button buttonParser;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.Panel panelMenu;
-        private System.Windows.Forms.Button btnParser;
-        private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Button btnAbout;
-        private System.Windows.Forms.Button btnSettings;
-        private System.Windows.Forms.Button btnStats;
         private System.Windows.Forms.Panel panelTitleBar;
-        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panelForm;
+        private MetroFramework.Controls.MetroTabControl tabControl;
+        private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private MetroFramework.Controls.MetroTabPage metroTabPage2;
+        private MetroFramework.Controls.MetroTabPage metroTabPage3;
+        private System.Windows.Forms.Panel panelOnOff;
+        private System.Windows.Forms.Button buttonParser;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelListview;
         private System.Windows.Forms.ListView lViewParser;
         private System.Windows.Forms.ColumnHeader number;
         private System.Windows.Forms.ColumnHeader logName;
         private System.Windows.Forms.ColumnHeader errorStatus;
         private System.Windows.Forms.ColumnHeader time;
+        private System.Windows.Forms.TextBox tBoxServer;
+        private System.Windows.Forms.Label lblServer;
+        private System.Windows.Forms.Label lblLogs;
+        private System.Windows.Forms.TextBox tBoxLogs;
+        private MetroFramework.Controls.MetroTabPage metroTabPage4;
+        private System.Windows.Forms.Panel panelSettings;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel5;
+        private MetroFramework.Controls.MetroLabel mlblCurrent;
+        private MetroFramework.Controls.MetroLabel mlblAll;
+        private MetroFramework.Controls.MetroLabel lblAbout;
+        private System.Windows.Forms.TextBox tBoxTimer;
+        private System.Windows.Forms.Label label1;
     }
 }
 
